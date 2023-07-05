@@ -3,6 +3,7 @@ import './App.css';
 import Input from './components/Input/Input';
 import Clear from './components/Clear/Clear';
 import { useState } from 'react';
+import { evaluate } from 'mathjs';
 function App() {
   const [input, setIput] = useState('');
   const addToInput = val => {
@@ -10,6 +11,9 @@ function App() {
   };
   const handleClear = () => {
     setIput('');
+  };
+  const handleEqual = () => {
+    setIput(evaluate(input));
   };
   return (
     <div className='App'>
@@ -37,7 +41,7 @@ function App() {
         <div className='row'>
           <Button addToInput={addToInput}>.</Button>
           <Button addToInput={addToInput}>0</Button>
-          <Button addToInput={addToInput}>=</Button>
+          <Button addToInput={() => handleEqual()}>=</Button>
           <Button addToInput={addToInput}>-</Button>
         </div>
         <Clear handleClear={handleClear}>Clear</Clear>
